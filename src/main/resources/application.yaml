@@ -1,0 +1,56 @@
+# ===============================================================
+# CORE APPLICATION
+# ===============================================================
+server:
+   port: 8761
+spring:
+   application:
+      name: discovery-server
+   output:
+      ansi:
+         enabled: ALWAYS
+   main:
+      banner-mode: off
+      log-startup-info: false
+   threads:
+      virtual:
+         enabled: false
+# ===============================================================
+# Eureka Server
+# ===============================================================
+eureka:
+   client:
+      register-with-eureka: false
+      fetch-registry: false
+# ===============================================================
+# OBSERVABILITY (LOGS & HEALTH)
+# ===============================================================
+management:
+   endpoints:
+      web:
+         exposure:
+            include:
+               - health
+               - info
+   info:
+      env:
+         enabled: false
+   endpoint:
+      health:
+         probes:
+            enabled: true
+         status:
+            http-mapping:
+               UP: 200
+               DOWN: 503
+# ===============================================================
+# Logging (TRACE < DEBUG < INFO < WARN < ERROR)
+# ===============================================================
+logging:
+   level:
+      root: INFO
+      com.netflix: ERROR
+      com.netflix.eureka: WARN
+      org.springframework.cloud.netflix.eureka: WARN
+   # pattern:
+   #    console: '%d{yyyy-MM-dd HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n'
