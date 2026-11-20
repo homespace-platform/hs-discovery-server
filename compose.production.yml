@@ -1,0 +1,11 @@
+services:
+    hs-discovery-server:
+        image: ${DISCOVERY_IMAGE:?}
+        pull_policy: always
+        restart: unless-stopped
+        mem_limit: 512m
+
+networks:
+    default:
+        external: true
+        name: hs-network
