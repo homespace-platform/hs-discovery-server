@@ -30,7 +30,7 @@ Cần `driver=overlay attachable=true`. Không xóa/tạo lại infra, network h
    | Autodeploy | Tắt trong lần chuyển đổi đầu |
 
 3. Save. Repo public HTTPS không cần SSH key; private cần quyền đọc. Phải đưa file Compose lên Git trước, Dokploy không đọc file local chưa push.
-4. **Environment**: dán `.env.dokploy` của Discovery với `DISCOVERY_IMAGE=nvminh162/hs-discovery-server:latest` hoặc tag SHA đã publish → Save. Biến image bắt buộc; Discovery không cần secrets runtime. File env được Git bỏ qua.
+4. **Environment**: dán `.env.prod` của Discovery với `DISCOVERY_IMAGE=nvminh162/hs-discovery-server:latest` hoặc tag SHA đã publish → Save. Biến image bắt buộc; Discovery không cần secrets runtime. File env được Git bỏ qua.
 5. **Preview Compose** phải có service `hs-discovery-server`, default network external `hs-network`, không có `ports:` public. Giữ tắt Isolated Deployment cho luồng dùng mạng chung; kiểm tra bản Preview vẫn giữ `hs-network`. Không cần thêm network bằng Advanced. YAML đặt memory limit 512 MiB; healthcheck được kế thừa từ image.
 6. Mặc định không public Eureka. Nếu cần giữ dashboard `discovery.homespace.id.vn`, domain thuộc **Compose mới → Domains**, Service `hs-discovery-server`, Port `8761`, Path `/`, Strip Path tắt, HTTPS/Let's Encrypt. Chỉ bật route sau khi gỡ domain trùng ở Application cũ; bảo vệ dashboard bằng xác thực/giới hạn truy cập trước khi public. Các backend vẫn dùng URL nội bộ, không dùng domain dashboard.
 
